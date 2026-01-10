@@ -14,7 +14,7 @@ model = ChatGroq(
 class Person(BaseModel):
     name: str = Field(description='Name of the person', max_length=10)
     age: int = Field(gt=18, lt= 60, description='Age of the person')
-    city: str = Field(description='Name of the city the person belongs to', max_length=30)
+    place: str = Field(description='Name of the city the person belongs to', max_length=30)
     eligible: bool = Field(description="Is eligible for voting in India")
 
 parser = PydanticOutputParser(pydantic_object=Person)
@@ -30,7 +30,7 @@ chain = template | model | parser
 final_result = chain.invoke({
     'name': 'Debjit',
     'age': 23,
-    'place': 'India'
+    'place': 'las vegas'
 })
 
 print(final_result)
